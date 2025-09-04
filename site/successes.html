@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Successes — PKMNTCGDeals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: { extend: { colors: { brand: { 50:'#eef7ff', 400:'#4e86ff', 600:'#2c6de6' } } } }
+      }
+    </script>
+    <style>
+      html, body, header, section, footer { transition: background-color .2s, color .2s, border-color .2s; }
+    </style>
+  </head>
+
+  <body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 backdrop-blur bg-white/70 dark:bg-slate-900/70 border-b border-slate-200/60 dark:border-slate-700">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100">
+        <img
+          src="assets/soraball.png"
+          alt="PKMNTCGDeals"
+          width="28" height="28"
+          class="h-7 w-7 rounded-full object-cover ring-1 ring-slate-300 dark:ring-slate-700"
+          loading="eager" decoding="async" />
+        <span>PKMNTCGDeals</span>
+      </a>
+
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="successes.html" class="text-brand-600 dark:text-brand-400 font-semibold">Success gallery</a>
+          <a href="about.html" class="hover:text-brand-600 dark:hover:text-brand-400">About</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <button id="themeToggle" class="rounded-xl border border-slate-300 dark:border-slate-600 px-2.5 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Toggle dark mode">
+            <svg class="h-5 w-5 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <a href="https://whop.com/pkmntcgdeals/?&a=thedewstr" class="inline-block rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow">Go Premium</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Community wins</h1>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">Auto-updated from our success channel.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <input id="search" placeholder="Search caption or author…" class="w-64 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-3 py-2 text-sm" />
+          <select id="retailer" class="rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-3 py-2 text-sm">
+            <option value="">All retailers</option>
+            <option>Pokemon Center</option>
+            <option>Walmart</option>
+            <option>Target</option>
+            <option>Amazon</option>
+            <option>Best Buy</option>
+            <option>GameStop</option>
+            <option>Costco</option>
+            <option>Barnes & Noble</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="grid" class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+      <div id="empty" class="hidden mt-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 p-6 text-slate-500 dark:text-slate-400">No matches.</div>
+
+      <div class="mt-8 text-center">
+        <button id="loadMore" class="rounded-xl border border-slate-300 dark:border-slate-600 px-4 py-2 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800">Load more</button>
+      </div>
+    </main>
+
+    <!-- Footer + Social -->
+    <footer class="border-t border-slate-200/70 dark:border-slate-800 py-10">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
+        <section id="social" class="py-4 border-t border-slate-200/70 dark:border-slate-700">
+          <div class="mx-auto max-w-7xl">
+            <h2 class="text-xl font-semibold">Find us online</h2>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Instagram">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg><span>Instagram</span>
+              </a>
+              <a href="https://twitter.com/PKMNTCG_Deals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="X (Twitter)">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3L13 11.3 21 21h-6.2l-5-6-5.6 6H1l8.2-9.1L1 3h6.3l4.6 5.5L17.5 3z"/></svg><span>X</span>
+              </a>
+              <a href="https://bsky.app/profile/pkmntcg.deals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Bluesky">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4c1.8 1.8 4.3 5 6 8 1.7-3 4.2-6.2 6-8 1.4-1.4 4 .4 2.5 2.1-1.6 1.9-4.7 4.1-6.2 5.1 2.1.7 5.9 2.5 5.9 5.3 0 2.8-3.5 3.3-5.8 1.5-1.3-1-1.9-2.1-2.4-3-.5.9-1.1 2-2.4 3-2.3 1.8-5.8 1.3-5.8-1.5 0-2.8 3.8-4.6 5.9-5.3C7.2 10.2 4.1 8 2.5 6.1 1 4.4 4.6 2.6 6 4z"/></svg><span>Bluesky</span>
+              </a>
+              <a href="https://www.reddit.com/r/PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Reddit">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12a4.5 4.5 0 0 0-3.6-4.4l.8-3.6-2.4-.5-.8 3.5a11 11 0 0 0-4 .1 4.5 4.5 0 0 0-4 4.9 5.9 5.9 0 0 0 0 .9 5.9 5.9 0 0 0 5.9 5.1h2a5.9 5.9 0 0 0 5.9-5.1 5.9 5.9 0 0 0 0-.9ZM8.8 13a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2Zm6.4 0a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2Zm-6 2.3a4.7 4.7 0 0 0 6.5 0"/></svg><span>Reddit</span>
+              </a>
+              <a href="https://discord.gg/PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="PKMNTCGDeals (Free)">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7.6 4.5C9.2 3.9 10.9 3.6 12 3.6s2.8.3 4.4.9l.3.1-.6 1.6c1.2.3 2 .8 2 .8 1.3 2 2 4.3 2 6.6 0 0-1.1 1.9-4.1 2.3-.5-.6-.9-1.3-1.1-2 1 .2 2.1-.1 2.9-.8-.9.1-1.8-.2-2.5-.8-1.6 1.2-3.6 1.2-5.2 0-.7.6-1.6.9-2.5.8.8.7 1.9 1 2.9.8-.2.7-.6 1.4-1.1 2-3-.4-4.1-2.3-4.1-2.3 0-2.3.7-4.6 2-6.6 0 0 .8-.5 2-.8l-.6-1.6.3-.1ZM9.5 12a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Zm5 0a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Z"/></svg>
+                <span>PKMNTCGDeals (Free)</span>
+              </a>
+              <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-yellow-400/70 dark:border-yellow-500/70 px-3 py-2 text-sm hover:bg-yellow-50 dark:hover:bg-yellow-900/20" aria-label="Gotta Ping 'Em All (Premium)">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 9 8l-6 .6 4.6 3.9L6 19l6-3.4 6 3.4-1.6-6.5L21 8.6 15 8z"/></svg>
+                <span>Gotta Ping 'Em All (Premium) Whop</span>
+              </a>
+              <a href="https://youtube.com/@PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="YouTube">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.5-5.3c-.3-1.1-1.2-2-2.3-2.3C18.5 4 12 4 12 4s-6.5 0-8.2.4C2.7 4.7 1.9 5.6 1.5 6.7 1 8.4 1 12 1 12s0 3.6.5 5.3c.3 1.1 1.2 2 2.3 2.3C5.5 20 12 20 12 20s6.5 0 8.2-.4c1.1-.3 2-1.2 2.3-2.3.5-1.7.5-5.3.5-5.3ZM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+                <span>YouTube</span>
+              </a>
+              <a href="https://www.tiktok.com/@pkmntcgdeals_official" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="TikTok">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3a6 6 0 0 0 4 2v3a9 9 0 0 1-4-1.1V14a6 6 0 1 1-6-6c.3 0 .7 0 1 .1V11a3 3 0 1 0 3 3V3h2Z"/></svg>
+                <span>TikTok</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-slate-500 dark:text-slate-400">this site is a work in progress; some things might not work! made with 💜 from mtndew</p>
+          <div class="flex items-center gap-4 text-sm"></div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      const WORKER_BASE = "https://pkmntcg-deals-api.ryantheshibainu.workers.dev";
+      const $ = s => document.querySelector(s);
+      const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
+
+      let all = []; let shown = 0; const page = 24;
+
+      function card(item){
+        const el = document.createElement('article');
+        el.className = "group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-sm";
+        el.innerHTML = `
+          <a class="block" href="${item.message_url || '#'}" target="_blank" rel="noopener noreferrer">
+            <img loading="lazy" class="h-40 w-full object-cover" alt="" src="${item.image_url}"/>
+          </a>
+          <div class="p-3">
+            <p class="line-clamp-2 text-sm text-slate-700 dark:text-slate-300">${item.caption || ''}</p>
+            <div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>@${item.author || 'member'}</span>
+              <time>${new Date(item.timestamp || Date.now()).toLocaleDateString()}</time>
+            </div>
+          </div>`;
+        return el;
+      }
+
+      function render(reset=false){
+        const grid = document.getElementById('grid');
+        const empty = document.getElementById('empty');
+        if (reset) { grid.innerHTML=''; shown=0; }
+        const slice = all.slice(shown, shown+page);
+        slice.forEach(i => grid.appendChild(card(i)));
+        shown += slice.length;
+        document.getElementById('loadMore').disabled = shown >= all.length;
+        empty.classList.toggle('hidden', all.length !== 0);
+      }
+
+      function applyFilters(){
+        const q = (document.getElementById('search').value || '').toLowerCase().trim();
+        const r = document.getElementById('retailer').value.toLowerCase();
+        const filtered = (window.__items || []).filter(i => {
+          const text = ((i.caption||'') + ' ' + (i.author||'')).toLowerCase();
+          const retailer = (i.retailer || '').toLowerCase();
+          return (!q || text.includes(q)) && (!r || retailer === r);
+        });
+        all = filtered;
+        render(true);
+      }
+
+      async function load(){
+        const res = await fetch(`${WORKER_BASE}/feed`, { cache:'no-store' });
+        const items = await res.json();
+        window.__items = (Array.isArray(items) ? items : []).sort((a,b) => (b.timestamp||0) - (a.timestamp||0));
+        applyFilters();
+      }
+
+      document.getElementById('search').addEventListener('input', applyFilters);
+      document.getElementById('retailer').addEventListener('change', applyFilters);
+      document.getElementById('loadMore').addEventListener('click', () => render());
+
+      load();
+    </script>
+
+    <script>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const preferDark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', preferDark);
+      })();
+      const btn = document.getElementById('themeToggle');
+      if (btn) btn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    </script>
+  </body>
+</html>
