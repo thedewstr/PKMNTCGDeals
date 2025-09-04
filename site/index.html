@@ -254,59 +254,84 @@
     </footer>
 
     <!-- Scripts -->
-    <script>
-      const WORKER_BASE = "https://pkmntcg-deals-api.ryantheshibainu.workers.dev";
-      const $ = (s, r=document) => r.querySelector(s);
-      const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
-      const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
+<script>
+const WORKER_BASE = "https://pkmntcg-deals-api.ryantheshibainu.workers.dev";
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const y = $('#year');                   // ← add these 2 lines
+if (y) y.textContent = new Date().getFullYear();
 
-      function animateCount(el, to, duration=800){
-        const from=0, start=performance.now();
-        const step=now=>{const p=Math.min(1,(now-start)/duration); el.textContent=Math.round(from+(to-from)*p).toLocaleString(); if(p<1) requestAnimationFrame(step)};
-        requestAnimationFrame(step);
-      }
+  function animateCount(el, to, duration=800) {
+    const from = 0, start = performance.now();
+    const step = now => {
+      const p = Math.min(1,(now-start)/duration);
+      el.textContent = Math.round(from+(to-from)*p).toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
 
-      async function loadSuccess(){
-        const grid = $('#successGrid'); const empty = $('#successEmpty');
-        try {
-          const res = await fetch(`${WORKER_BASE}/feed`, { cache:'no-store' });
-          if (!res.ok) throw new Error('feed http ' + res.status);
-          const items = await res.json();
-          if (!Array.isArray(items) || !items.length){ empty.classList.remove('hidden'); return; }
-          let shown=0;
-          for (const item of items.slice(0,12)){
-            if (!item.image_url) continue;
-            const tpl = $('#successCardTpl').content.cloneNode(true);
-            const a = tpl.querySelector('a'); const img = tpl.querySelector('img');
-            const caption = tpl.querySelector('[data-field="caption"]');
-            const author = tpl.querySelector('[data-field="author"]');
-            const time = tpl.querySelector('[data-field="time"]');
-            a.href = item.message_url || item.permalink || '#';
-            img.src = item.image_url; img.alt = item.caption || 'Success';
-            caption.textContent = item.caption || 'Success from our community';
-            author.textContent = '@' + (item.author || 'member');
-            time.textContent = new Date(item.timestamp || Date.now()).toLocaleDateString();
-            grid.appendChild(tpl); shown++;
-          }
-          if (shown===0) empty.classList.remove('hidden');
-          $('#heroGallery').classList.remove('skeleton');
-          const hero = $('#heroGallery'); const heroImgs = $$('#successGrid img').slice(0,4);
-          if (heroImgs.length){
-            hero.innerHTML='';
-            const wrapper=document.createElement('div'); wrapper.className='grid grid-cols-2 gap-2 h-full';
-            hero.appendChild(wrapper);
-            for(const h of heroImgs){ const c=document.createElement('img'); c.src=h.src; c.alt=h.alt; c.loading='lazy'; c.className='h-full w-full object-cover rounded-xl'; wrapper.appendChild(c); }
-          }
-          animateCount($('#stat-success'), Math.max(8, $$('#successGrid article').length));
-          animateCount($('#stat-members'), 1200);
-          animateCount($('#stat-alerts'), 85);
-        } catch(e){ console.warn('feed error', e); empty.classList.remove('hidden'); }
+  async function loadStats() {
+    try {
+      const res = await fetch(`${WORKER_BASE}/stats`, { cache: 'no-store' });
+      if (!res.ok) throw new Error('stats http ' + res.status);
+      const s = await res.json();
+      if (typeof s.members === 'number')         animateCount($('#stat-members'), s.members);
+      if (typeof s.alerts_per_week === 'number')  animateCount($('#stat-alerts'), s.alerts_per_week);
+      if (typeof s.recent_wins === 'number')      animateCount($('#stat-success'), s.recent_wins);
+    } catch (e) {
+      console.warn('stats error', e);
+      // leave dashes in UI if stats are unavailable
+    }
+  }
+
+  async function loadSuccess() {
+    const grid = $('#successGrid'); const empty = $('#successEmpty');
+    try {
+      const res = await fetch(`${WORKER_BASE}/feed`, { cache: 'no-store' });
+      if (!res.ok) throw new Error('feed http ' + res.status);
+      const items = await res.json();
+      if (!Array.isArray(items) || !items.length) { empty.classList.remove('hidden'); return; }
+      let shown=0;
+      for (const item of items.slice(0,12)) {
+        if (!item.image_url) continue;
+        const tpl = $('#successCardTpl').content.cloneNode(true);
+        const a = tpl.querySelector('a'); const img = tpl.querySelector('img');
+        const caption = tpl.querySelector('[data-field="caption"]');
+        const author = tpl.querySelector('[data-field="author"]');
+        const time   = tpl.querySelector('[data-field="time"]');
+        a.href = item.message_url || item.permalink || '#';
+        img.src = item.image_url; img.alt = item.caption || 'Success';
+        caption.textContent = item.caption || 'Success from our community';
+        author.textContent = '@' + (item.author || 'member');
+        time.textContent = new Date(item.timestamp || Date.now()).toLocaleDateString();
+        grid.appendChild(tpl); shown++;
       }
-      document.addEventListener('DOMContentLoaded', () => {
-        loadSuccess();
-        setTimeout(()=> $$('.fade-in').forEach(el=>el.classList.add('show')), 100);
-      });
-    </script>
+      if (shown===0) empty.classList.remove('hidden');
+      $('#heroGallery').classList.remove('skeleton');
+      const hero = $('#heroGallery'); const heroImgs = $$('#successGrid img').slice(0,4);
+      if (heroImgs.length) {
+        hero.innerHTML='';
+        const wrapper=document.createElement('div');
+        wrapper.className='grid grid-cols-2 gap-2 h-full'; hero.appendChild(wrapper);
+        for(const h of heroImgs){ const c=document.createElement('img');
+          c.src=h.src; c.alt=h.alt; c.loading='lazy'; c.className='h-full w-full object-cover rounded-xl';
+          wrapper.appendChild(c);
+        }
+      }
+      // remove the hardcoded placeholder counts here
+      // animateCount($('#stat-success'), Math.max(8, $$('#successGrid article').length));
+      // animateCount($('#stat-members'), 1200);
+      // animateCount($('#stat-alerts'), 85);
+    } catch(e) { console.warn('feed error', e); empty.classList.remove('hidden'); }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadSuccess();
+    loadStats();           // ← fetch and animate real numbers
+    setTimeout(()=> $$('.fade-in').forEach(el=>el.classList.add('show')), 100);
+  });
+</script>
 
     <script>
       (function () {
