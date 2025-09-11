@@ -285,15 +285,17 @@ if (y) y.textContent = new Date().getFullYear();
     }
   }
 
-  async function loadSuccess() {
-    const grid  = document.getElementById('successGrid');
-    const empty = document.getElementById('successEmpty');
-    const hero  = document.getElementById('heroGallery');
+async function loadSuccess() {
+  const grid  = document.getElementById('successGrid');
+  const empty = document.getElementById('successEmpty');
+  const hero  = document.getElementById('heroGallery');
 
-    try {
-      const res = await fetch(`${WORKER_BASE}/feed`, { cache: 'no-store' });
-      if (!res.ok) throw new Error('feed http ' + res.status);
-      const items = Array.isArray(await res.json()) ? await res.json() : [];
+  try {
+    const res = await fetch(`${WORKER_BASE}/feed`, { cache: 'no-store' });
+    if (!res.ok) throw new Error('feed http ' + res.status);
+
+    const raw   = await res.json();
+    const items = Array.isArray(raw) ? raw : [];
 
       // --- HERO: build directly from feed (don’t depend on the grid) ---
       const heroItems = (items || []).filter(i => i?.image_url).slice(0, 4);
