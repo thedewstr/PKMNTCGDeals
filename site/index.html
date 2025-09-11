@@ -291,58 +291,40 @@ async function loadSuccess() {
   const empty = document.getElementById('successEmpty');
   const hero  = document.getElementById('heroGallery');
 
-  const renderHero = (items) => {
+  const buildHero = (items) => {
     const pics = (items || []).filter(i => i && i.image_url).slice(0, 4);
     hero.classList.remove('skeleton');
 
-    if (pics.length) {
-      hero.innerHTML = `
-        <div class="grid grid-cols-2 gap-2 h-full">
-          ${pics.map(i => `
-            <img src="${i.image_url}"
-                 alt="${(i.caption || 'Success').replace(/"/g,'&quot;')}"
-                 loading="eager" decoding="async"
-                 class="h-full w-full object-cover rounded-xl"
-                 onerror="this.remove()"/>
-          `).join('')}
-        </div>`;
-      return true;
-    }
-    return false;
-  };
-
-  const renderHeroFromGrid = () => {
-    const imgs = Array.from(document.querySelectorAll('#successGrid img')).slice(0, 4);
-    hero.classList.remove('skeleton');
-    if (!imgs.length) {
+    if (!pics.length) {
       hero.innerHTML = `<div class="h-full w-full rounded-2xl bg-slate-200/40 dark:bg-slate-800/40"></div>`;
       return;
     }
-    hero.innerHTML = '';
-    const wrap = document.createElement('div');
-    wrap.className = 'grid grid-cols-2 gap-2 h-full';
-    imgs.forEach(srcImg => {
-      const img = document.createElement('img');
-      img.src = srcImg.src;
-      img.alt = srcImg.alt || 'Success';
-      img.loading = 'eager';
-      img.decoding = 'async';
-      img.className = 'h-full w-full object-cover rounded-xl';
-      wrap.appendChild(img);
-    });
-    hero.appendChild(wrap);
+    hero.innerHTML = `
+      <div class="grid grid-cols-2 gap-2 h-full">
+        ${pics.map(i => `
+          <img src="${i.image_url}"
+               alt="${(i.caption || 'Success').replace(/"/g,'&quot;')}"
+               loading="eager" decoding="async"
+               class="h-full w-full object-cover rounded-xl"
+               onerror="this.remove()"/>
+        `).join('')}
+      </div>`;
   };
 
   try {
-    const res = await fetch(`${WORKER_BASE}/feed`, { cache: 'no-store' });
+    const res = await fetch(`${WORKER_BASE}/feed?ts=${Date.now()}`, { cache: 'no-store' });
     if (!res.ok) throw new Error('feed http ' + res.status);
-    const raw   = await res.json();
-    const items = Array.isArray(raw) ? raw : [];
 
-    // Try to build hero directly from the feed
-    const heroOK = renderHero(items);
+    const raw = await res.json(); // IMPORTANT: only call .json() once
+    const items = Array.isArray(raw) ? raw
+                : Array.isArray(raw.items) ? raw.items
+                : Array.isArray(raw.results) ? raw.results
+                : [];
 
-    // Build the grid (12 items)
+    // HERO
+    buildHero(items);
+
+    // GRID (first 12)
     grid.innerHTML = '';
     let shown = 0;
     for (const item of items.slice(0, 12)) {
@@ -351,7 +333,8 @@ async function loadSuccess() {
       card.className = "group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow";
       card.innerHTML = `
         <a class="block" href="${item.message_url || '#'}" target="_blank" rel="noopener noreferrer">
-          <img loading="lazy" decoding="async" class="h-40 w-full object-cover" alt=""
+          <img loading="lazy" decoding="async" class="h-40 w-full object-cover"
+               alt="${(item.caption || '').replace(/"/g,'&quot;')}"
                src="${item.image_url}"/>
         </a>
         <div class="p-3">
@@ -365,9 +348,6 @@ async function loadSuccess() {
       shown++;
     }
     if (shown === 0) empty.classList.remove('hidden');
-
-    // If feed-based hero didn’t render, fall back to copying from the grid
-    if (!heroOK) renderHeroFromGrid();
 
   } catch (e) {
     console.warn('feed error', e);
