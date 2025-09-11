@@ -319,16 +319,12 @@ if (y) y.textContent = new Date().getFullYear();
           wrapper.appendChild(c);
         }
       }
-      // remove the hardcoded placeholder counts here
-      // animateCount($('#stat-success'), Math.max(8, $$('#successGrid article').length));
-      // animateCount($('#stat-members'), 1200);
-      // animateCount($('#stat-alerts'), 85);
     } catch(e) { console.warn('feed error', e); empty.classList.remove('hidden'); }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     loadSuccess();
-    loadStats();           // ← fetch and animate real numbers
+    loadStats(); 
     setTimeout(()=> $$('.fade-in').forEach(el=>el.classList.add('show')), 100);
   });
 </script>

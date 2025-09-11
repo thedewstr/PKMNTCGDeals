@@ -1,0 +1,21 @@
+name = "pkmntcg-deals-api"
+main = "index.js"            # or src/worker.js if you’re bundling
+compatibility_date = "2025-09-01"
+workers_dev = true
+
+routes = [
+  { pattern = "api.pkmntcg.deals/*", zone_name = "pkmntcg.deals" }
+]
+
+[vars]
+CORS_ORIGIN = "https://pkmntcg.deals"
+MAX_POSTS   = "500"          # or whatever you want
+
+[[kv_namespaces]]
+binding = "POSTS"
+id = "f7407063c957413cae56087eac76aff3" 
+preview_id = "f7407063c957413cae56087eac76aff3"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "pkmntcg-images"
