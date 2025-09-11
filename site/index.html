@@ -286,45 +286,66 @@ if (y) y.textContent = new Date().getFullYear();
   }
 
   async function loadSuccess() {
-    const grid = $('#successGrid'); const empty = $('#successEmpty');
+    const grid  = document.getElementById('successGrid');
+    const empty = document.getElementById('successEmpty');
+    const hero  = document.getElementById('heroGallery');
+
     try {
       const res = await fetch(`${WORKER_BASE}/feed`, { cache: 'no-store' });
       if (!res.ok) throw new Error('feed http ' + res.status);
-      const items = await res.json();
-      if (!Array.isArray(items) || !items.length) { empty.classList.remove('hidden'); return; }
-      let shown=0;
-      for (const item of items.slice(0,12)) {
-        if (!item.image_url) continue;
-        const tpl = $('#successCardTpl').content.cloneNode(true);
-        const a = tpl.querySelector('a'); const img = tpl.querySelector('img');
-        const caption = tpl.querySelector('[data-field="caption"]');
-        const author = tpl.querySelector('[data-field="author"]');
-        const time   = tpl.querySelector('[data-field="time"]');
-        a.href = item.message_url || item.permalink || '#';
-        img.src = item.image_url; img.alt = item.caption || 'Success';
-        caption.textContent = item.caption || 'Success from our community';
-        author.textContent = '@' + (item.author || 'member');
-        time.textContent = new Date(item.timestamp || Date.now()).toLocaleDateString();
-        grid.appendChild(tpl); shown++;
+      const items = Array.isArray(await res.json()) ? await res.json() : [];
+
+      // --- HERO: build directly from feed (don’t depend on the grid) ---
+      const heroItems = (items || []).filter(i => i?.image_url).slice(0, 4);
+      hero.classList.remove('skeleton');
+      if (heroItems.length) {
+        hero.innerHTML = `
+          <div class="grid grid-cols-2 gap-2 h-full">
+            ${heroItems.map(i => `
+              <img src="${i.image_url}" alt="${(i.caption||'Success').replace(/"/g,'&quot;')}"
+                   loading="eager" class="h-full w-full object-cover rounded-xl" />
+            `).join('')}
+          </div>`;
+      } else {
+        // Fallback (no images): keep a soft placeholder
+        hero.innerHTML = `<div class="h-full w-full rounded-2xl bg-slate-200/40 dark:bg-slate-800/40"></div>`;
       }
-      if (shown===0) empty.classList.remove('hidden');
-      $('#heroGallery').classList.remove('skeleton');
-      const hero = $('#heroGallery'); const heroImgs = $$('#successGrid img').slice(0,4);
-      if (heroImgs.length) {
-        hero.innerHTML='';
-        const wrapper=document.createElement('div');
-        wrapper.className='grid grid-cols-2 gap-2 h-full'; hero.appendChild(wrapper);
-        for(const h of heroImgs){ const c=document.createElement('img');
-          c.src=h.src; c.alt=h.alt; c.loading='lazy'; c.className='h-full w-full object-cover rounded-xl';
-          wrapper.appendChild(c);
-        }
+
+      // --- GRID: show 12 recent cards ---
+      grid.innerHTML = '';
+      let shown = 0;
+      for (const item of (items || []).slice(0, 12)) {
+        if (!item?.image_url) continue;
+        const card = document.createElement('article');
+        card.className = "group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow";
+        card.innerHTML = `
+          <a class="block" href="${item.message_url || '#'}" target="_blank" rel="noopener noreferrer">
+            <img loading="lazy" class="h-40 w-full object-cover" alt=""
+                 src="${item.image_url}"/>
+          </a>
+          <div class="p-3">
+            <p class="line-clamp-2 text-sm text-slate-700 dark:text-slate-300">${item.caption || ''}</p>
+            <div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span>@${item.author || 'member'}</span>
+              <time>${new Date(item.timestamp || Date.now()).toLocaleDateString()}</time>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+        shown++;
       }
-    } catch(e) { console.warn('feed error', e); empty.classList.remove('hidden'); }
+
+      if (shown === 0) empty.classList.remove('hidden');
+    } catch (e) {
+      console.warn('feed error', e);
+      hero.classList.remove('skeleton');
+      hero.innerHTML = `<div class="h-full w-full rounded-2xl bg-slate-200/40 dark:bg-slate-800/40"></div>`;
+      empty.classList.remove('hidden');
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     loadSuccess();
-    loadStats(); 
+    loadStats();           
     setTimeout(()=> $$('.fade-in').forEach(el=>el.classList.add('show')), 100);
   });
 </script>
