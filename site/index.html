@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en" class="scroll-smooth">
+  <link rel="icon" href="assets/soraball.png">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +22,27 @@
   </head>
 
   <body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+
+<!-- St. Jude promo bar -->
+<div id="donationBar"
+     class="w-full bg-yellow-50 text-slate-900 dark:bg-yellow-900/30 dark:text-yellow-50 border-b border-yellow-200 dark:border-yellow-800">
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2">
+    <a href="https://fundraising.stjude.org/site/TR?px=9049209&fr_id=157660&pg=personal"
+       target="_blank" rel="noopener"
+       class="block text-center text-sm sm:text-[0.95rem] leading-6 font-medium hover:underline">
+      🎁 Help us support the incredible mission of St. Jude Children’s Research Hospital this holiday season! 🎁
+    </a>
+
+    <!-- Close for this session -->
+    <button id="donationBarClose"
+            class="absolute right-2 top-1/2 -translate-y-1/2 rounded-md px-2 py-1 text-sm border border-yellow-300/70 dark:border-yellow-700/70 hover:bg-yellow-100/60 dark:hover:bg-yellow-800/30"
+            aria-label="Hide banner for this session">
+      ✕
+    </button>
+  </div>
+</div>
+    <!--end-->
+
     <!-- Header -->
     <header class="sticky top-0 z-40 backdrop-blur bg-white/70 dark:bg-slate-900/70 border-b border-slate-200/60 dark:border-slate-700">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
@@ -259,7 +281,7 @@
 const WORKER_BASE = "https://pkmntcg-deals-api.ryantheshibainu.workers.dev";
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
-const y = $('#year');                   // ← add these 2 lines
+const y = $('#year');
 if (y) y.textContent = new Date().getFullYear();
 
   function animateCount(el, to, duration=800) {
@@ -282,7 +304,6 @@ if (y) y.textContent = new Date().getFullYear();
       if (typeof s.recent_wins === 'number')      animateCount($('#stat-success'), s.recent_wins);
     } catch (e) {
       console.warn('stats error', e);
-      // leave dashes in UI if stats are unavailable
     }
   }
 
@@ -376,5 +397,38 @@ async function loadSuccess() {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
     </script>
+<script>
+(() => {
+  const BAR_ID = 'donationBar';
+  const KEY_DISMISSED = 'donationBar:dismissed';
+  const KEY_HIDDEN_SESSION = 'donationBar:hiddenSession';
+
+  const bar = document.getElementById(BAR_ID);
+  if (!bar) return;
+
+  const dismissed = localStorage.getItem(KEY_DISMISSED) === '1';
+  const hiddenThisSession = sessionStorage.getItem(KEY_HIDDEN_SESSION) === '1';
+
+  // show only if not permanently dismissed and not hidden in this session
+  if (dismissed || hiddenThisSession) bar.style.display = 'none';
+
+  const btnClose = document.getElementById('donationBarClose');
+  const btnDismiss = document.getElementById('donationBarDismiss');
+
+  if (btnClose) {
+    btnClose.addEventListener('click', () => {
+      sessionStorage.setItem(KEY_HIDDEN_SESSION, '1'); // session-only hide
+      bar.style.display = 'none';
+    });
+  }
+  if (btnDismiss) {
+    btnDismiss.addEventListener('click', () => {
+      localStorage.setItem(KEY_DISMISSED, '1'); // persistent hide
+      bar.style.display = 'none';
+    });
+  }
+})();
+</script>
+
   </body>
 </html>
