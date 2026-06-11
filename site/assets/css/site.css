@@ -1,0 +1,91 @@
+html,
+body,
+header,
+section,
+footer {
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #eee 25%, #f6f6f6 37%, #eee 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, #1f2937 25%, #111827 37%, #1f2937 63%);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.policy-card {
+  border: 1px solid rgb(226 232 240);
+  background: rgba(255, 255, 255, .85);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, .04);
+}
+
+.dark .policy-card {
+  border-color: rgb(51 65 85);
+  background: rgba(15, 23, 42, .82);
+}
+
+.policy-content h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: rgb(15 23 42);
+}
+
+.dark .policy-content h2 {
+  color: #fff;
+}
+
+.policy-content p {
+  margin-top: .75rem;
+  color: rgb(71 85 105);
+  line-height: 1.75;
+}
+
+.dark .policy-content p {
+  color: rgb(148 163 184);
+}
+
+.policy-content ul {
+  margin-top: 1rem;
+  list-style: disc;
+  padding-left: 1.25rem;
+  color: rgb(71 85 105);
+  line-height: 1.75;
+}
+
+.dark .policy-content ul {
+  color: rgb(148 163 184);
+}
+
+.policy-pill {
+  border-radius: .75rem;
+  border: 1px solid rgb(203 213 225);
+  padding: .75rem;
+  text-align: center;
+  font-size: .875rem;
+  font-weight: 600;
+  color: rgb(44 109 230);
+  background: rgba(238, 247, 255, .7);
+}
+
+.dark .policy-pill {
+  border-color: rgb(51 65 85);
+  background: rgba(30, 41, 59, .7);
+  color: #4e86ff;
+}
