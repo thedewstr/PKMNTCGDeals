@@ -1,0 +1,52 @@
+name: Build Tailwind CSS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**/*.html"
+      - "site/assets/js/**"
+      - "src/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/build-css.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-css-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build stylesheet
+        run: npm run build:css
+
+      - name: Commit the rebuilt stylesheet if it changed
+        run: |
+          if git diff --quiet -- site/assets/css/tailwind.css; then
+            echo "Stylesheet already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/assets/css/tailwind.css
+          git commit -m "chore: rebuild Tailwind stylesheet [skip ci]"
+          git push

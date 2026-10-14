@@ -1,384 +1,304 @@
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-  <link rel="icon" href="assets/soraball.png">
-  <head>
-    <meta charset="utf-8" />
-    <meta name='impact-site-verification' value=9818f42c-f4a2-4662-b13e-522f8d1f537b>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PKMNTCGDeals: Real-time restocks, alerts, and successes!</title>
-    <meta name="description" content="Find Pokémon TCG restocks and deals fast. Live alerts, success gallery, and a premium Discord with curated monitors." />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: { extend: { colors: { brand: { 50:'#eef7ff', 400:'#4e86ff', 600:'#2c6de6' } } } }
-      }
-    </script>
-    <style>
-      html, body, header, section, footer { transition: background-color .2s, color .2s, border-color .2s; }
-      .skeleton{background:linear-gradient(90deg,#eee 25%,#f6f6f6 37%,#eee 63%);background-size:400% 100%;animation:shimmer 1.2s infinite}
-      .dark .skeleton{background:linear-gradient(90deg,#1f2937 25%,#111827 37%,#1f2937 63%)}
-      @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-    </style>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="impact-site-verification" value="9818f42c-f4a2-4662-b13e-522f8d1f537b" />
+  <title>PKMNTCGDeals — Real-time restocks, alerts, and wins</title>
+  <meta name="description" content="Live Pokémon TCG restock alerts, curated by humans and boosted by smart monitors. Track Pokémon Center, Walmart, Target, Best Buy and more — and see real community wins." />
+  <link rel="canonical" href="https://pkmntcg.deals/" />
+  <link rel="icon" href="assets/soraball.png" />
+  <link rel="apple-touch-icon" href="assets/soraball.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PKMNTCGDeals" />
+  <meta property="og:title" content="PKMNTCGDeals — Real-time restocks, alerts, and wins" />
+  <meta property="og:description" content="Live Pokémon TCG restock alerts, curated by humans and boosted by smart monitors." />
+  <meta property="og:url" content="https://pkmntcg.deals/" />
+  <meta property="og:image" content="https://pkmntcg.deals/assets/soraball.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="assets/css/tailwind.css" />
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      } catch (e) {}
+    })();
+  </script>
+</head>
 
-  <body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+<body class="min-h-screen bg-white text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100">
 
-    <!-- Header -->
-    <header class="sticky top-0 z-40 backdrop-blur bg-white/70 dark:bg-slate-900/70 border-b border-slate-200/60 dark:border-slate-700">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-        <a href="index.html" class="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100">
-        <img
-          src="assets/soraball.png"
-          alt="PKMNTCGDeals"
-          width="28" height="28"
-          class="h-7 w-7 rounded-full object-cover ring-1 ring-slate-300 dark:ring-slate-700"
-          loading="eager" decoding="async" />
-        <span>PKMNTCGDeals</span>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">Skip to content</a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/80">
+    <div class="container-x flex h-16 items-center justify-between gap-3">
+      <a href="index.html" class="flex items-center gap-2.5 font-semibold text-slate-900 dark:text-white">
+        <img src="assets/soraball.png" alt="" width="28" height="28" class="h-7 w-7 rounded-full ring-1 ring-slate-300 dark:ring-slate-700" decoding="async" />
+        <span class="tracking-tight">PKMNTCGDeals</span>
       </a>
 
-        <nav class="hidden md:flex items-center gap-6 text-sm">
-          <a href="#how" class="hover:text-brand-600 dark:hover:text-brand-400">How it works</a>
-          <a href="successes.html" class="hover:text-brand-600 dark:hover:text-brand-400">Success gallery</a>
-          <a href="#features" class="hover:text-brand-600 dark:hover:text-brand-400">Features</a>
-          <a href="about.html" class="hover:text-brand-600 dark:hover:text-brand-400">About</a>
-          <a href="#faq" class="hover:text-brand-600 dark:hover:text-brand-400">FAQ</a>
-          <a href="privacy.html" class="hover:text-brand-600 dark:hover:text-brand-400">Privacy</a>
-        </nav>
+      <nav class="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex dark:text-slate-300" aria-label="Primary">
+        <a href="#how" class="transition hover:text-brand-600 dark:hover:text-brand-400">How it works</a>
+        <a href="successes.html" class="transition hover:text-brand-600 dark:hover:text-brand-400">Success gallery</a>
+        <a href="#features" class="transition hover:text-brand-600 dark:hover:text-brand-400">Features</a>
+        <a href="about.html" class="transition hover:text-brand-600 dark:hover:text-brand-400">About</a>
+        <a href="#faq" class="transition hover:text-brand-600 dark:hover:text-brand-400">FAQ</a>
+      </nav>
 
-        <div class="flex items-center gap-3">
-          <!-- Theme toggle -->
-          <button id="themeToggle" class="rounded-xl border border-slate-300 dark:border-slate-600 px-2.5 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Toggle dark mode">
-            <svg class="h-5 w-5 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-            </svg>
-            <svg class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </button>
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" type="button" aria-label="Toggle dark mode" class="rounded-xl border border-slate-300 p-2 text-slate-600 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900">
+          <svg class="block h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
 
-          <a href="https://whop.com/pkmntcgdeals/?&a=thedewstr" class="inline-block rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow">Go Premium</a>
-        </div>
+        <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" class="hidden rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-600/25 transition hover:bg-brand-700 sm:inline-block">Go Premium</a>
+
+        <button id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" class="rounded-xl border border-slate-300 p-2 text-slate-600 transition hover:bg-slate-100 md:hidden dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </div>
-    </header>
+    </div>
 
+    <div id="mobileMenu" class="hidden border-t border-slate-200 bg-white md:hidden dark:border-slate-800 dark:bg-slate-950">
+      <nav class="container-x flex flex-col py-2 text-sm font-medium" aria-label="Mobile">
+        <a href="#how" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">How it works</a>
+        <a href="successes.html" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">Success gallery</a>
+        <a href="#features" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">Features</a>
+        <a href="about.html" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">About</a>
+        <a href="#faq" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">FAQ</a>
+        <a href="privacy.html" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">Privacy</a>
+        <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" class="mt-2 rounded-xl bg-brand-600 px-4 py-3 text-center font-semibold text-white">Go Premium</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
     <!-- Hero -->
     <section class="relative overflow-hidden">
-      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 to-white dark:from-slate-900 dark:to-slate-900"></div>
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Catch restocks <span class="text-brand-600 dark:text-brand-400">before they vanish</span>
-          </h1>
-          <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">Live Pokémon TCG restock alerts, curated by humans, boosted by smart monitors. Join the community that actually lands the drops.</p>
-          <div class="mt-6 flex flex-wrap items-center gap-3">
-            <a href="https://whop.com/pkmntcgdeals/?&a=thedewstr" class="rounded-xl bg-brand-600 px-5 py-3 text-white font-semibold shadow hover:bg-blue-700">Join Premium</a>
-            <a href="successes.html" class="rounded-xl border border-slate-300 dark:border-slate-600 px-5 py-3 font-semibold hover:bg-slate-50 dark:hover:bg-slate-800">See the wins</a>
-          </div>
-          <div class="mt-6 grid grid-cols-3 gap-4 text-center">
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/60 backdrop-blur p-4">
-              <div class="text-2xl font-bold dark:text-white" id="stat-members">—</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">Members</div>
-            </div>
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/60 backdrop-blur p-4">
-              <div class="text-2xl font-bold dark:text-white" id="stat-alerts">—</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">Alerts / week</div>
-            </div>
-            <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/60 backdrop-blur p-4">
-              <div class="text-2xl font-bold dark:text-white" id="stat-success">—</div>
-              <div class="text-xs text-slate-500 dark:text-slate-400">Recent wins</div>
-            </div>
-          </div>
-          <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">*Numbers update automatically from our live feed when available.</p>
-        </div>
-        <div class="relative">
-          <div id="heroGallery" class="min-h-[220px] aspect-[16/10] w-full overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-700 shadow skeleton"></div>
+      <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 via-white to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950"></div>
+      <div class="pointer-events-none absolute -top-40 left-1/2 -z-10 h-96 w-[46rem] -translate-x-1/2 rounded-full bg-brand-400/20 blur-3xl dark:bg-brand-600/20"></div>
 
+      <div class="container-x grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
+        <div>
+          <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-white">
+            Catch restocks
+            <span class="bg-gradient-to-r from-brand-600 to-brand-400 bg-clip-text text-transparent">before they vanish</span>
+          </h1>
+
+          <p class="mt-5 max-w-xl text-lg text-slate-600 dark:text-slate-400">
+            Live Pokémon TCG restock alerts, curated by humans and boosted by smart monitors. Join the community that actually lands the drops — at MSRP, not scalper prices.
+          </p>
+
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" class="rounded-xl bg-brand-600 px-5 py-3 font-semibold text-white shadow-lg shadow-brand-600/25 transition hover:bg-brand-700">Join Premium</a>
+            <a href="successes.html" class="rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-900">See the wins</a>
+          </div>
+
+          <dl class="mt-9 grid max-w-lg grid-cols-3 gap-3 text-center">
+            <div class="rounded-2xl border border-slate-200 bg-white/70 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
+              <dd class="text-2xl font-bold tabular-nums text-slate-900 dark:text-white" id="stat-members">—</dd>
+              <dt class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">Members</dt>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white/70 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
+              <dd class="text-2xl font-bold tabular-nums text-slate-900 dark:text-white" id="stat-alerts">—</dd>
+              <dt class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">Alerts / week</dt>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white/70 p-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
+              <dd class="text-2xl font-bold tabular-nums text-slate-900 dark:text-white" id="stat-success">—</dd>
+              <dt class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">Recent wins</dt>
+            </div>
+          </dl>
+          <p class="mt-3 text-xs text-slate-500 dark:text-slate-500">*Numbers update automatically from our live feed when available.</p>
+        </div>
+
+        <div class="relative">
+          <div class="pointer-events-none absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-tr from-brand-500/20 via-transparent to-transparent blur-2xl"></div>
+          <div id="heroGallery" class="skeleton grid aspect-[4/3] w-full grid-cols-2 gap-2 overflow-hidden rounded-3xl border border-slate-200 p-2 dark:border-slate-800"></div>
         </div>
       </div>
     </section>
 
     <!-- How it works -->
-    <section id="how" class="py-14 border-t border-slate-200/70 dark:border-slate-800">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">How it works</h2>
-        <div class="mt-8 grid md:grid-cols-3 gap-6">
-          <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
-            <div class="text-sm font-semibold text-brand-600 dark:text-brand-400">1 · Smart monitors</div>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">We keep an eye on Pokémon Center as well as other major retailers and smaller shops.</p>
+    <section id="how" class="border-t border-slate-200/70 py-16 dark:border-slate-800">
+      <div class="container-x">
+        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">How it works</h2>
+        <p class="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">Three moving parts, one goal: get you to the checkout before the stock is gone.</p>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <div class="fade-in rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900/60">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 font-bold text-brand-700 dark:bg-brand-600/15 dark:text-brand-300">1</div>
+            <h3 class="mt-4 font-semibold">Smart monitors</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">We keep an eye on Pokémon Center as well as other major retailers and smaller shops.</p>
           </div>
-          <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
-            <div class="text-sm font-semibold text-brand-600 dark:text-brand-400">2 · Curated alerts</div>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">We ping for restocks, item page changes, and preorders.</p>
+          <div class="fade-in rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900/60">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 font-bold text-brand-700 dark:bg-brand-600/15 dark:text-brand-300">2</div>
+            <h3 class="mt-4 font-semibold">Curated alerts</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">We ping for restocks, item page changes, and preorders — filtered so you're not spammed.</p>
           </div>
-          <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
-            <div class="text-sm font-semibold text-brand-600 dark:text-brand-400">3 · Community wins</div>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">Members show their hits in real time. Check out our successes below.</p>
+          <div class="fade-in rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900/60">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 font-bold text-brand-700 dark:bg-brand-600/15 dark:text-brand-300">3</div>
+            <h3 class="mt-4 font-semibold">Community wins</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Members post their hits in real time, and they land right here on the site.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Success gallery -->
-    <section id="success" class="py-14 bg-slate-50 dark:bg-slate-900 border-t border-slate-200/70 dark:border-slate-800">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between gap-4">
-          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Success gallery</h2>
-          <a href="#join" class="text-sm font-semibold text-brand-600 dark:text-brand-400 hover:underline">Join & post your wins →</a>
+    <section id="success" class="border-t border-slate-200/70 bg-slate-50 py-16 dark:border-slate-800 dark:bg-slate-900/40">
+      <div class="container-x">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Success gallery</h2>
+            <p class="mt-2 text-slate-600 dark:text-slate-400">Pulled live from our community's success channel.</p>
+          </div>
+          <a href="successes.html" class="text-sm font-semibold text-brand-600 hover:underline dark:text-brand-400">View all wins &rarr;</a>
         </div>
-        <p class="mt-2 text-slate-600 dark:text-slate-400">Pulled live from our community’s success channel.</p>
-        <div id="successGrid" class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          <template id="successCardTpl">
-            <article class="group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow fade-in">
-              <a class="block" target="_blank" rel="noopener noreferrer">
-                <img loading="lazy" class="h-40 w-full object-cover" alt="Community success post" />
-              </a>
-              <div class="p-3">
-                <p class="line-clamp-2 text-sm text-slate-700 dark:text-slate-300" data-field="caption">—</p>
-                <div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                  <span data-field="author">@member</span>
-                  <time data-field="time">now</time>
-                </div>
-              </div>
-            </article>
-          </template>
+
+        <div id="successGrid" class="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4"></div>
+        <div id="successEmpty" class="mt-8 hidden rounded-2xl border border-dashed border-slate-300 p-8 text-center text-slate-500 dark:border-slate-700 dark:text-slate-400">No recent wins right now — check back after the next drop.</div>
+
+        <div class="mt-8 text-center">
+          <a href="https://discord.gg/PKMNTCGDeals" class="inline-block rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800">Join &amp; post your wins</a>
         </div>
-        <div id="successEmpty" class="hidden mt-6 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 p-6 text-slate-500 dark:text-slate-400">No recent wins yet.</div>
       </div>
     </section>
 
     <!-- Features -->
-    <section id="features" class="py-14 border-t border-slate-200/70 dark:border-slate-800">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Made for fast, human checkouts - beat the bots and the scalpers!</h2>
-        <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
-            <h3 class="font-semibold">Retailer Coverage</h3>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">Pokémon Center, Walmart, Target, Best Buy, Amazon, GameStop, Costco, B&N, and more.</p>
+    <section id="features" class="border-t border-slate-200/70 py-16 dark:border-slate-800">
+      <div class="container-x">
+        <h2 class="max-w-3xl text-2xl font-bold tracking-tight sm:text-3xl">Made for fast, human checkouts — beat the bots and the scalpers</h2>
+
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="fade-in rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900/60">
+            <h3 class="font-semibold">Retailer coverage</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Pokémon Center, Walmart, Target, Best Buy, Amazon, GameStop, Costco, B&amp;N, and more.</p>
           </div>
-          <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
-            <h3 class="font-semibold">In-Store Stock Checking</h3>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">We monitor in-store stock so you can check for your desired item without the need to call ahead.</p>
+          <div class="fade-in rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900/60">
+            <h3 class="font-semibold">In-store stock checking</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Check whether your local store has an item before making the drive — without calling ahead.</p>
           </div>
-          <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
-            <h3 class="font-semibold">Community</h3>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">We have a community that loves interacting, whether that be live rips, movie nights, or gaming.</p>
+          <div class="fade-in rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900/60">
+            <h3 class="font-semibold">Beyond Pokémon</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Magic, Gundam, One Piece, Labubu &amp; POPMART drops, food deals, and general Amazon finds.</p>
+          </div>
+          <div class="fade-in rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900/60">
+            <h3 class="font-semibold">A real community</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Live rips, movie nights, gaming, giveaways, and people genuinely rooting for each other's pulls.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Join -->
-    <section id="join" class="py-14">
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Ready to eat big at the next restock?</h2>
-        <p class="mt-3 text-slate-600 dark:text-slate-400">Free community access is available. Premium gets you earlier alerts, watches more stores, and allows you to track in-store stock.</p>
-        <div class="mt-8 grid sm:grid-cols-2 gap-6 text-left">
-          <div class="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6">
+    <!-- Join / pricing -->
+    <section id="join" class="border-t border-slate-200/70 bg-slate-50 py-16 dark:border-slate-800 dark:bg-slate-900/40">
+      <div class="container-x max-w-4xl text-center">
+        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Ready to eat big at the next restock?</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-slate-600 dark:text-slate-400">Free community access is always available. Premium gets you earlier alerts, watches more stores, and unlocks in-store stock tracking.</p>
+
+        <div class="mt-8 grid gap-6 text-left sm:grid-cols-2">
+          <div class="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900/60">
             <h3 class="text-lg font-semibold">Free</h3>
-            <ul class="mt-3 space-y-2 text-slate-600 dark:text-slate-400 text-sm list-disc list-inside">
-              <li>Highlights feed</li><li>Basic alerts</li><li>Community support</li>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">The community firehose.</p>
+            <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+              <li class="flex gap-2"><span class="text-brand-600 dark:text-brand-400">&#10003;</span> Highlights feed</li>
+              <li class="flex gap-2"><span class="text-brand-600 dark:text-brand-400">&#10003;</span> Basic alerts</li>
+              <li class="flex gap-2"><span class="text-brand-600 dark:text-brand-400">&#10003;</span> Community support</li>
             </ul>
-            <a href="https://discord.gg/PKMNTCGDeals" class="mt-4 inline-block rounded-xl border border-slate-300 dark:border-slate-600 px-4 py-2 font-semibold hover:bg-slate-50 dark:hover:bg-slate-800">Join Free Server</a>
+            <a href="https://discord.gg/PKMNTCGDeals" class="mt-6 inline-block rounded-xl border border-slate-300 px-4 py-2.5 text-center font-semibold transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800">Join Free Server</a>
           </div>
-          <div class="rounded-2xl border-2 border-brand-600 p-6">
+
+          <div class="relative flex flex-col rounded-2xl border-2 border-brand-600 bg-white p-6 shadow-lg shadow-brand-600/10 dark:bg-slate-900/60">
+            <span class="absolute -top-3 left-6 rounded-full bg-brand-600 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">Most popular</span>
             <h3 class="text-lg font-semibold">Premium</h3>
-            <ul class="mt-3 space-y-2 text-slate-600 dark:text-slate-400 text-sm list-disc list-inside">
-              <li>Monitor many retailers and shops</li><li>Early headsup & faster pings</li><li>Events, giveaways, and more</li>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Gotta Ping 'Em All.</p>
+            <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+              <li class="flex gap-2"><span class="text-brand-600 dark:text-brand-400">&#10003;</span> Monitors many retailers and shops</li>
+              <li class="flex gap-2"><span class="text-brand-600 dark:text-brand-400">&#10003;</span> Early heads-up &amp; faster pings</li>
+              <li class="flex gap-2"><span class="text-brand-600 dark:text-brand-400">&#10003;</span> In-store stock checking</li>
+              <li class="flex gap-2"><span class="text-brand-600 dark:text-brand-400">&#10003;</span> Events, giveaways, and more</li>
             </ul>
-            <a href="https://whop.com/pkmntcgdeals/?&a=thedewstr" class="mt-4 inline-block rounded-xl bg-brand-600 px-4 py-2 font-semibold text-white hover:bg-blue-700">Get Premium Access</a>
+            <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" class="mt-6 inline-block rounded-xl bg-brand-600 px-4 py-2.5 text-center font-semibold text-white transition hover:bg-brand-700">Get Premium Access</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="py-14 border-t border-slate-200/70 dark:border-slate-800">
-      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">FAQ</h2>
-        <div class="mt-6 space-y-6">
-          <details class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4">
-            <summary class="font-semibold cursor-pointer">Is this automated or manual?</summary>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">Our free server, PKMNTCG Deals is a community based effort to monitor stock. Our premium server, Gotta Ping 'Em All, uses monitoring services to track restocks of Pokémon, Magic, Gundam, and more.</p>
+    <section id="faq" class="border-t border-slate-200/70 py-16 dark:border-slate-800">
+      <div class="container-x max-w-3xl">
+        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">FAQ</h2>
+
+        <div class="mt-8 space-y-3">
+          <details class="group rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900/60">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold">
+              Is this automated or manual?
+              <svg class="h-5 w-5 shrink-0 text-slate-400 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Our free server, PKMNTCGDeals, is a community-based effort to monitor stock. Our premium server, Gotta Ping 'Em All, uses monitoring services to track restocks of Pokémon, Magic, Gundam, and more.</p>
           </details>
-          <details class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4">
-            <summary class="font-semibold cursor-pointer">Which stores do you cover?</summary>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">We keep an eye on Pokémon Center, Walmart, Target, Amazon, Best Buy, GameStop, Costco, Barnes & Noble, and more.</p>
+
+          <details class="group rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900/60">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold">
+              Which stores do you cover?
+              <svg class="h-5 w-5 shrink-0 text-slate-400 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">We keep an eye on Pokémon Center, Walmart, Target, Amazon, Best Buy, GameStop, Costco, Barnes &amp; Noble, and more.</p>
           </details>
-          <details class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4">
-            <summary class="font-semibold cursor-pointer">How fast are alerts?</summary>
-            <p class="mt-2 text-slate-600 dark:text-slate-400">Normally, we see updates a little before or as they happen.</p>
+
+          <details class="group rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900/60">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold">
+              How fast are alerts?
+              <svg class="h-5 w-5 shrink-0 text-slate-400 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Normally we see updates a little before or right as they happen — that's the whole point of running monitors instead of refreshing pages yourself.</p>
+          </details>
+
+          <details class="group rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900/60">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold">
+              Where do the success images come from?
+              <svg class="h-5 w-5 shrink-0 text-slate-400 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <p class="mt-3 text-sm text-slate-600 dark:text-slate-400">Straight from our community. When a member posts a win with a photo, our bot mirrors it and the gallery here picks it up automatically. See <a href="privacy.html" class="font-medium text-brand-600 hover:underline dark:text-brand-400">Privacy</a> for details.</p>
           </details>
         </div>
       </div>
     </section>
+  </main>
 
-    <!-- Footer + Social -->
-    <footer class="border-t border-slate-200/70 dark:border-slate-800 py-10">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col gap-6">
-        <section id="social" class="py-4 border-t border-slate-200/70 dark:border-slate-700">
-          <div class="mx-auto max-w-7xl">
-            <h2 class="text-xl font-semibold">Find us online</h2>
-            <div class="mt-4 flex flex-wrap gap-3">
-              <a href="https://instagram.com/pkmntcgdeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Instagram">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg><span>Instagram</span>
-              </a>
-              <a href="https://twitter.com/PKMNTCG_Deals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="X (Twitter)">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3L13 11.3 21 21h-6.2l-5-6-5.6 6H1l8.2-9.1L1 3h6.3l4.6 5.5L17.5 3z"/></svg><span>X</span>
-              </a>
-              <a href="https://bsky.app/profile/pkmntcg.deals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Bluesky">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4c1.8 1.8 4.3 5 6 8 1.7-3 4.2-6.2 6-8 1.4-1.4 4 .4 2.5 2.1-1.6 1.9-4.7 4.1-6.2 5.1 2.1.7 5.9 2.5 5.9 5.3 0 2.8-3.5 3.3-5.8 1.5-1.3-1-1.9-2.1-2.4-3-.5.9-1.1 2-2.4 3-2.3 1.8-5.8 1.3-5.8-1.5 0-2.8 3.8-4.6 5.9-5.3C7.2 10.2 4.1 8 2.5 6.1 1 4.4 4.6 2.6 6 4z"/></svg><span>Bluesky</span>
-              </a>
-              <a href="https://www.reddit.com/r/PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Reddit">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12a4.5 4.5 0 0 0-3.6-4.4l.8-3.6-2.4-.5-.8 3.5a11 11 0 0 0-4 .1 4.5 4.5 0 0 0-4 4.9 5.9 5.9 0 0 0 0 .9 5.9 5.9 0 0 0 5.9 5.1h2a5.9 5.9 0 0 0 5.9-5.1 5.9 5.9 0 0 0 0-.9ZM8.8 13a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2Zm6.4 0a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2Zm-6 2.3a4.7 4.7 0 0 0 6.5 0"/></svg><span>Reddit</span>
-              </a>
-              <a href="https://discord.gg/PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="PKMNTCGDeals (Free)">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7.6 4.5C9.2 3.9 10.9 3.6 12 3.6s2.8.3 4.4.9l.3.1-.6 1.6c1.2.3 2 .8 2 .8 1.3 2 2 4.3 2 6.6 0 0-1.1 1.9-4.1 2.3-.5-.6-.9-1.3-1.1-2 1 .2 2.1-.1 2.9-.8-.9.1-1.8-.2-2.5-.8-1.6 1.2-3.6 1.2-5.2 0-.7.6-1.6.9-2.5.8.8.7 1.9 1 2.9.8-.2.7-.6 1.4-1.1 2-3-.4-4.1-2.3-4.1-2.3 0-2.3.7-4.6 2-6.6 0 0 .8-.5 2-.8l-.6-1.6.3-.1ZM9.5 12a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Zm5 0a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4Z"/></svg>
-                <span>PKMNTCGDeals (Free)</span>
-              </a>
-              <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-yellow-400/70 dark:border-yellow-500/70 px-3 py-2 text-sm hover:bg-yellow-50 dark:hover:bg-yellow-900/20" aria-label="Gotta Ping 'Em All (Premium)">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 9 8l-6 .6 4.6 3.9L6 19l6-3.4 6 3.4-1.6-6.5L21 8.6 15 8z"/></svg>
-                <span>Gotta Ping 'Em All (Premium) Whop</span>
-              </a>
-              <a href="https://youtube.com/@PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="YouTube">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.5-5.3c-.3-1.1-1.2-2-2.3-2.3C18.5 4 12 4 12 4s-6.5 0-8.2.4C2.7 4.7 1.9 5.6 1.5 6.7 1 8.4 1 12 1 12s0 3.6.5 5.3c.3 1.1 1.2 2 2.3 2.3C5.5 20 12 20 12 20s6.5 0 8.2-.4c1.1-.3 2-1.2 2.3-2.3.5-1.7.5-5.3.5-5.3ZM10 15.5v-7l6 3.5-6 3.5z"/></svg>
-                <span>YouTube</span>
-              </a>
-              <a href="https://www.tiktok.com/@pkmntcgdeals_official" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-2 text-sm hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="TikTok">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M16 3a6 6 0 0 0 4 2v3a9 9 0 0 1-4-1.1V14a6 6 0 1 1-6-6c.3 0 .7 0 1 .1V11a3 3 0 1 0 3 3V3h2Z"/></svg>
-                <span>TikTok</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p class="text-sm text-slate-500 dark:text-slate-400">this site is a work in progress; some things might not work! made with 💜 from mtndew</p>
-          <div class="flex items-center gap-4 text-sm"></div>
+  <!-- Footer -->
+  <footer class="border-t border-slate-200/70 dark:border-slate-800">
+    <div class="container-x flex flex-col gap-8 py-12">
+      <div>
+        <h2 class="text-lg font-semibold">Find us online</h2>
+        <div class="mt-4 flex flex-wrap gap-2.5">
+          <a href="https://discord.gg/PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-900">Discord</a>
+          <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-yellow-400/70 px-3 py-2 text-sm transition hover:bg-yellow-50 dark:border-yellow-500/60 dark:hover:bg-yellow-900/20">Premium (Whop)</a>
+          <a href="https://www.reddit.com/r/PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-900">Reddit</a>
+          <a href="https://twitter.com/PKMNTCG_Deals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-900">X</a>
+          <a href="https://bsky.app/profile/pkmntcg.deals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-900">Bluesky</a>
+          <a href="https://instagram.com/pkmntcgdeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-900">Instagram</a>
+          <a href="https://youtube.com/@PKMNTCGDeals" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-900">YouTube</a>
+          <a href="https://www.tiktok.com/@pkmntcgdeals_official" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-3 py-2 text-sm transition hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-900">TikTok</a>
         </div>
       </div>
-    </footer>
 
-    <!-- Scripts -->
-<script>
-const WORKER_BASE = "https://pkmntcg-deals-api.ryantheshibainu.workers.dev";
-const $  = (s, r=document) => r.querySelector(s);
-const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
-const y = $('#year');
-if (y) y.textContent = new Date().getFullYear();
+      <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200/70 pt-6 text-sm md:flex-row dark:border-slate-800">
+        <p class="text-slate-500 dark:text-slate-400">&copy; <span data-year>2026</span> PKMNTCGDeals &middot; made with &#128156; by mtndew</p>
+        <div class="flex items-center gap-5">
+          <a href="about.html" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">About</a>
+          <a href="successes.html" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">Successes</a>
+          <a href="privacy.html" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">Privacy</a>
+        </div>
+      </div>
+      <p class="text-xs text-slate-400 dark:text-slate-500">Some links may be affiliate links. This site is a fan-run community project and is not affiliated with or endorsed by The Pokémon Company.</p>
+    </div>
+  </footer>
 
-  function animateCount(el, to, duration=800) {
-    const from = 0, start = performance.now();
-    const step = now => {
-      const p = Math.min(1,(now-start)/duration);
-      el.textContent = Math.round(from+(to-from)*p).toLocaleString();
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-
-  async function loadStats() {
-    try {
-      const res = await fetch(`${WORKER_BASE}/stats`, { cache: 'no-store' });
-      if (!res.ok) throw new Error('stats http ' + res.status);
-      const s = await res.json();
-      if (typeof s.members === 'number')         animateCount($('#stat-members'), s.members);
-      if (typeof s.alerts_per_week === 'number')  animateCount($('#stat-alerts'), s.alerts_per_week);
-      if (typeof s.recent_wins === 'number')      animateCount($('#stat-success'), s.recent_wins);
-    } catch (e) {
-      console.warn('stats error', e);
-    }
-  }
-
-async function loadSuccess() {
-  const grid  = document.getElementById('successGrid');
-  const empty = document.getElementById('successEmpty');
-  const hero  = document.getElementById('heroGallery');
-
-  const buildHero = (items) => {
-    const pics = (items || []).filter(i => i && i.image_url).slice(0, 4);
-    hero.classList.remove('skeleton');
-
-    if (!pics.length) {
-      hero.innerHTML = `<div class="h-full w-full rounded-2xl bg-slate-200/40 dark:bg-slate-800/40"></div>`;
-      return;
-    }
-    hero.innerHTML = `
-      <div class="grid grid-cols-2 gap-2 h-full">
-        ${pics.map(i => `
-          <img src="${i.image_url}"
-               alt="${(i.caption || 'Success').replace(/"/g,'&quot;')}"
-               loading="eager" decoding="async"
-               class="h-full w-full object-cover rounded-xl"
-               onerror="this.remove()"/>
-        `).join('')}
-      </div>`;
-  };
-
-  try {
-    const res = await fetch(`${WORKER_BASE}/feed?ts=${Date.now()}`, { cache: 'no-store' });
-    if (!res.ok) throw new Error('feed http ' + res.status);
-
-    const raw = await res.json(); // IMPORTANT: only call .json() once
-    const items = Array.isArray(raw) ? raw
-                : Array.isArray(raw.items) ? raw.items
-                : Array.isArray(raw.results) ? raw.results
-                : [];
-
-    // HERO
-    buildHero(items);
-
-    // GRID (first 12)
-    grid.innerHTML = '';
-    let shown = 0;
-    for (const item of items.slice(0, 12)) {
-      if (!item || !item.image_url) continue;
-      const card = document.createElement('article');
-      card.className = "group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow";
-      card.innerHTML = `
-        <a class="block" href="${item.message_url || '#'}" target="_blank" rel="noopener noreferrer">
-          <img loading="lazy" decoding="async" class="h-40 w-full object-cover"
-               alt="${(item.caption || '').replace(/"/g,'&quot;')}"
-               src="${item.image_url}"/>
-        </a>
-        <div class="p-3">
-          <p class="line-clamp-2 text-sm text-slate-700 dark:text-slate-300">${item.caption || ''}</p>
-          <div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-            <span>@${item.author || 'member'}</span>
-            <time>${new Date(item.timestamp || Date.now()).toLocaleDateString()}</time>
-          </div>
-        </div>`;
-      grid.appendChild(card);
-      shown++;
-    }
-    if (shown === 0) empty.classList.remove('hidden');
-
-  } catch (e) {
-    console.warn('feed error', e);
-    hero.classList.remove('skeleton');
-    hero.innerHTML = `<div class="h-full w-full rounded-2xl bg-slate-200/40 dark:bg-slate-800/40"></div>`;
-    empty.classList.remove('hidden');
-  }
-}
-
-  document.addEventListener('DOMContentLoaded', () => {
-    loadSuccess();
-    loadStats();           
-    setTimeout(()=> $$('.fade-in').forEach(el=>el.classList.add('show')), 100);
-  });
-</script>
-
-    <script>
-      (function () {
-        const stored = localStorage.getItem('theme');
-        const preferDark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.classList.toggle('dark', preferDark);
-      })();
-      const btn = document.getElementById('themeToggle');
-      if (btn) btn.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      });
-    </script>
-
-  </body>
+  <script src="assets/js/feed.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
 </html>

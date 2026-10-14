@@ -3,146 +3,138 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Privacy Policy - PKMNTCGDeals</title>
+  <title>Privacy Policy — PKMNTCGDeals</title>
   <meta name="description" content="Privacy Policy for PKMNTCGDeals and Miraidon, the community Discord bot." />
-
-  <link rel="icon" href="assets/soraball.png">
-
-  <script src="assets/js/tailwind-config.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="canonical" href="https://pkmntcg.deals/privacy.html" />
+  <link rel="icon" href="assets/soraball.png" />
+  <link rel="apple-touch-icon" href="assets/soraball.png" />
+  <link rel="stylesheet" href="assets/css/tailwind.css" />
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 
-<body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100">
-  <header class="sticky top-0 z-40 backdrop-blur bg-white/70 dark:bg-slate-900/70 border-b border-slate-200/60 dark:border-slate-700">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100">
-        <img
-          src="assets/soraball.png"
-          alt="PKMNTCGDeals"
-          width="28"
-          height="28"
-          class="h-7 w-7 rounded-full object-cover ring-1 ring-slate-300 dark:ring-slate-700"
-          loading="eager"
-          decoding="async"
-        />
-        <span>PKMNTCGDeals</span>
+<body class="min-h-screen bg-white text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">Skip to content</a>
+
+  <header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/80 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-950/80">
+    <div class="container-x flex h-16 items-center justify-between gap-3">
+      <a href="index.html" class="flex items-center gap-2.5 font-semibold text-slate-900 dark:text-white">
+        <img src="assets/soraball.png" alt="" width="28" height="28" class="h-7 w-7 rounded-full ring-1 ring-slate-300 dark:ring-slate-700" decoding="async" />
+        <span class="tracking-tight">PKMNTCGDeals</span>
       </a>
-
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="index.html#how" class="hover:text-brand-600 dark:hover:text-brand-400">How it works</a>
-        <a href="successes.html" class="hover:text-brand-600 dark:hover:text-brand-400">Success gallery</a>
-        <a href="index.html#features" class="hover:text-brand-600 dark:hover:text-brand-400">Features</a>
-        <a href="about.html" class="hover:text-brand-600 dark:hover:text-brand-400">About</a>
-        <a href="privacy.html" class="text-brand-600 dark:text-brand-400 font-semibold">Privacy</a>
+      <nav class="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex dark:text-slate-300" aria-label="Primary">
+        <a href="index.html#how" class="transition hover:text-brand-600 dark:hover:text-brand-400">How it works</a>
+        <a href="successes.html" class="transition hover:text-brand-600 dark:hover:text-brand-400">Success gallery</a>
+        <a href="index.html#features" class="transition hover:text-brand-600 dark:hover:text-brand-400">Features</a>
+        <a href="about.html" class="transition hover:text-brand-600 dark:hover:text-brand-400">About</a>
+        <a href="privacy.html" class="font-semibold text-brand-600 dark:text-brand-400" aria-current="page">Privacy</a>
       </nav>
-
-      <div class="flex items-center gap-3">
-        <button id="themeToggle" class="rounded-xl border border-slate-300 dark:border-slate-600 px-2.5 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800" aria-label="Toggle dark mode">
-          <svg class="h-5 w-5 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-          </svg>
-          <svg class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" type="button" aria-label="Toggle dark mode" class="rounded-xl border border-slate-300 p-2 text-slate-600 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900">
+          <svg class="block h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
-
-        <a href="https://whop.com/pkmntcgdeals/?&a=thedewstr" class="inline-block rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700">
-          Go Premium
-        </a>
+        <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" class="hidden rounded-xl bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-600/25 transition hover:bg-brand-700 sm:inline-block">Go Premium</a>
+        <button id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" class="rounded-xl border border-slate-300 p-2 text-slate-600 transition hover:bg-slate-100 md:hidden dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </div>
+    </div>
+    <div id="mobileMenu" class="hidden border-t border-slate-200 bg-white md:hidden dark:border-slate-800 dark:bg-slate-950">
+      <nav class="container-x flex flex-col py-2 text-sm font-medium" aria-label="Mobile">
+        <a href="index.html" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">Home</a>
+        <a href="successes.html" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">Success gallery</a>
+        <a href="about.html" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">About</a>
+        <a href="privacy.html" class="rounded-lg px-2 py-3 hover:bg-slate-100 dark:hover:bg-slate-900">Privacy</a>
+        <a href="https://whop.com/pkmntcgdeals/?a=thedewstr" class="mt-2 rounded-xl bg-brand-600 px-4 py-3 text-center font-semibold text-white">Go Premium</a>
+      </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="relative overflow-hidden border-b border-slate-200/70 dark:border-slate-800">
-      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 to-white dark:from-slate-900 dark:to-slate-900"></div>
-
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-14">
-        <div class="inline-flex items-center gap-2 rounded-full border border-brand-600/20 bg-white/70 dark:bg-slate-900/70 px-3 py-1 text-sm text-brand-600 dark:text-brand-400">
-          <span>🛡️</span>
-          <span>Community data, kept simple</span>
-        </div>
-
-        <h1 class="mt-5 text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          Privacy Policy
-        </h1>
-
-        <p class="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-3xl">
-          How PKMNTCGDeals handles data, submitted images, Discord IDs, bot features, and removal requests.
-        </p>
-
-        <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">
-          Last updated: <span class="font-semibold">6/11/2026</span>
-        </p>
+      <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 via-white to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-950"></div>
+      <div class="container-x max-w-5xl py-14">
+        <span class="inline-flex items-center gap-2 rounded-full border border-brand-600/20 bg-white/70 px-3 py-1 text-sm text-brand-700 dark:bg-slate-900/70 dark:text-brand-300">
+          <span aria-hidden="true">&#128737;&#65039;</span> Community data, kept simple
+        </span>
+        <h1 class="mt-5 text-3xl font-extrabold tracking-tight sm:text-5xl">Privacy Policy</h1>
+        <p class="mt-4 max-w-3xl text-lg text-slate-600 dark:text-slate-400">How PKMNTCGDeals handles data, submitted images, Discord IDs, bot features, and removal requests.</p>
+        <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Last updated: <span class="font-semibold">6/11/2026</span></p>
       </div>
     </section>
 
     <section class="py-12">
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[240px_1fr] gap-8">
+      <div class="container-x grid max-w-5xl gap-8 lg:grid-cols-[240px_1fr]">
         <aside class="hidden lg:block">
-          <div class="sticky top-24 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 p-4">
-            <p class="text-sm font-semibold text-slate-900 dark:text-white">On this page</p>
-            <nav class="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+          <nav class="sticky top-24 rounded-2xl border border-slate-200 bg-white/80 p-4 text-sm dark:border-slate-800 dark:bg-slate-900/60" aria-label="On this page">
+            <p class="font-semibold text-slate-900 dark:text-white">On this page</p>
+            <div class="mt-3 space-y-2 text-slate-600 dark:text-slate-400">
               <a class="block hover:text-brand-600 dark:hover:text-brand-400" href="#short-version">Short version</a>
               <a class="block hover:text-brand-600 dark:hover:text-brand-400" href="#miraidon">What Miraidon does</a>
+              <a class="block hover:text-brand-600 dark:hover:text-brand-400" href="#pelipper">What Pelipper does</a>
               <a class="block hover:text-brand-600 dark:hover:text-brand-400" href="#collect">What we collect</a>
               <a class="block hover:text-brand-600 dark:hover:text-brand-400" href="#use">How we use it</a>
               <a class="block hover:text-brand-600 dark:hover:text-brand-400" href="#storage">Storage</a>
               <a class="block hover:text-brand-600 dark:hover:text-brand-400" href="#removal">Removal</a>
               <a class="block hover:text-brand-600 dark:hover:text-brand-400" href="#contact">Contact</a>
-            </nav>
-          </div>
+            </div>
+          </nav>
         </aside>
 
         <article class="policy-content space-y-6">
           <section id="short-version" class="policy-card">
             <h2>The short version</h2>
-            <p>
-              PKMNTCGDeals is a community-driven Pokémon TCG deals and restock community. Miraidon is our community Discord bot.
-              We collect only what is needed to run community features, we do not sell user data, we do not use user data for advertising,
-              and we do not use user data to train AI or machine-learning models.
-            </p>
+            <p>PKMNTCGDeals is a community-driven Pokémon TCG deals and restock community. Miraidon is our community Discord bot. We collect only what is needed to run community features, we do not sell user data, we do not use user data for advertising, and we do not use user data to train AI or machine-learning models.</p>
           </section>
 
           <section id="miraidon" class="policy-card">
             <h2>What Miraidon does</h2>
-            <p>
-              Miraidon helps operate community features across the PKMNTCGDeals Free server and the Gotta Ping ’Em All Premium server.
-              Depending on the server, Miraidon may help forward approved links, repost community content, process user-submitted success images,
-              support moderation, and provide interactive entertainment features such as games, collections, and music.
-            </p>
-            <p>
-              Some entertainment features use free in-bot virtual currency. That currency has no real-world cash value, cannot be purchased
-              with real money, cannot be cashed out, and is used only for fun inside the bot.
-            </p>
+            <p>Miraidon helps operate community features across the PKMNTCGDeals Free server and the Gotta Ping 'Em All Premium server. Depending on the server, Miraidon may help forward approved links, repost community content, process user-submitted success images, support moderation, and provide interactive entertainment features such as games, collections, and music.</p>
+            <p>Some entertainment features use free in-bot virtual currency. That currency has no real-world cash value, cannot be purchased with real money, cannot be cashed out, and is used only for fun inside the bot.</p>
+          </section>
+
+          <section id="pelipper" class="policy-card">
+            <h2>What Pelipper does</h2>
+            <p>Pelipper is a second community bot, separate from Miraidon, used to help members check stock at local stores. It only runs in the servers it has been added to, and using it is optional.</p>
+
+            <h3>What Pelipper stores</h3>
+            <ul>
+              <li>Stock reports &mdash; the item, quantity, store, and status, plus the reporting member's Discord ID and display name, an optional note, and the ZIP code used for the lookup.</li>
+              <li>An optional home ZIP code, only if a member chooses to save one.</li>
+              <li>A short usage log (server ID, user ID, action, timestamp), used only to rate-limit spam.</li>
+            </ul>
+
+            <h3>How it is handled</h3>
+            <p>This information is encrypted both in transit and at rest (the database itself is encrypted), and stored on a private server that only the maintainer team can access. It is not sold, not shared, and not used for advertising or to train AI or machine-learning models.</p>
+
+            <h3>Opting out and removal</h3>
+            <p>You are never required to use Pelipper &mdash; nothing is stored for members who don't. If you have already saved a ZIP code or filed a report and would like it removed, just ask a moderator or administrator and we will delete it for you.</p>
           </section>
 
           <section id="collect" class="policy-card">
             <h2>Information we collect</h2>
-            <p>
-              Miraidon and pkmntcg.deals may store limited information needed for the community features to work.
-            </p>
+            <p>Miraidon and pkmntcg.deals may store limited information needed for the community features to work.</p>
             <ul>
               <li>Discord user IDs for bot features, attribution, game data, collections, and moderation records.</li>
               <li>Game balances, collection progress, virtual items, and related bot-feature data.</li>
               <li>Message references, image URLs, and images voluntarily submitted in designated community channels.</li>
-              <li>Minimal moderation/rule-enforcement records when needed to enforce server rules.</li>
+              <li>Minimal moderation / rule-enforcement records when needed to enforce server rules.</li>
             </ul>
-            <p>
-              When user-submitted images are processed, EXIF metadata is removed where applicable before storage or reposting.
-            </p>
+            <p>When user-submitted images are processed, EXIF metadata is removed where applicable before storage or reposting.</p>
           </section>
 
           <section id="use" class="policy-card">
             <h2>How we use information</h2>
-            <p>
-              We use information to run bot features, maintain game and collection progress, forward approved community links or images,
-              display success posts, moderate server rules, prevent abuse, and respond to removal requests.
-            </p>
-            <div class="grid sm:grid-cols-3 gap-3 mt-4">
+            <p>We use information to run bot features, maintain game and collection progress, forward approved community links or images, display success posts, moderate server rules, prevent abuse, and respond to removal requests.</p>
+            <div class="mt-4 grid gap-3 sm:grid-cols-3">
               <div class="policy-pill">No selling data</div>
               <div class="policy-pill">No advertising profiles</div>
               <div class="policy-pill">No AI training</div>
@@ -151,76 +143,51 @@
 
           <section id="storage" class="policy-card">
             <h2>Off-platform storage</h2>
-            <p>
-              Some data may be stored outside Discord so the bot and website can function. This may include Cloudflare-hosted images,
-              hosted image URLs, bot storage files or databases, and website hosting infrastructure.
-            </p>
-            <p>
-              Stored data is limited to what is needed for Miraidon and pkmntcg.deals to operate.
-            </p>
+            <p>Some data may be stored outside Discord so the bot and website can function. This may include Cloudflare-hosted images, hosted image URLs, bot storage files or databases, and website hosting infrastructure.</p>
+            <p>Stored data is limited to what is needed for Miraidon and pkmntcg.deals to operate.</p>
           </section>
 
           <section id="removal" class="policy-card">
             <h2>Data retention and removal</h2>
-            <p>
-              We keep data only as long as needed for community features, moderation, abuse prevention, or site functionality.
-            </p>
-            <p>
-              Users may request removal of submitted images or related bot data by contacting a PKMNTCGDeals administrator or moderator.
-              Please include enough information to identify the content, such as the Discord account, channel, message link, image URL,
-              or approximate date.
-            </p>
+            <p>We keep data only as long as needed for community features, moderation, abuse prevention, or site functionality.</p>
+            <p>Users may request removal of submitted images or related bot data by contacting a PKMNTCGDeals administrator or moderator. Please include enough information to identify the content, such as the Discord account, channel, message link, image URL, or approximate date.</p>
           </section>
 
           <section class="policy-card">
             <h2>Third-party services</h2>
-            <p>
-              We may use services such as Discord, Cloudflare, Whop, and website hosting providers to operate the community, bot, and website.
-              These services are used only to provide community functionality, hosting, delivery, payment/access management where applicable,
-              and related infrastructure.
-            </p>
+            <p>We may use services such as Discord, Cloudflare, Whop, and website hosting providers to operate the community, bot, and website. These services are used only to provide community functionality, hosting, delivery, payment / access management where applicable, and related infrastructure.</p>
           </section>
 
           <section class="policy-card">
             <h2>Security</h2>
-            <p>
-              We take reasonable steps to limit access to bot data, hosting systems, and administrative tools to authorized maintainers.
-            </p>
+            <p>We take reasonable steps to limit access to bot data, hosting systems, and administrative tools to authorized maintainers.</p>
           </section>
 
           <section class="policy-card">
             <h2>Changes</h2>
-            <p>
-              This policy may be updated as Miraidon, pkmntcg.deals, or community features change. When updates are made,
-              the “Last updated” date will be changed.
-            </p>
+            <p>This policy may be updated as Miraidon, pkmntcg.deals, or community features change. When updates are made, the "Last updated" date will be changed.</p>
           </section>
 
-          <section id="contact" class="policy-card border-brand-600/40 dark:border-brand-400/40">
+          <section id="contact" class="policy-card border-brand-600/40">
             <h2>Contact</h2>
-            <p>
-              For questions or removal requests, please reach out to the admin team through Discord.
-            </p>
+            <p>For questions or removal requests, please reach out to the admin team through Discord.</p>
           </section>
         </article>
       </div>
     </section>
   </main>
 
-  <footer class="border-t border-slate-200/70 dark:border-slate-800 py-10">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-slate-500 dark:text-slate-400">
-        this site is a work in progress; some things might not work! made with 💜 from mtndew
-      </p>
-
-      <div class="flex items-center gap-4 text-sm">
-        <a href="about.html" class="text-slate-500 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">About</a>
-        <a href="privacy.html" class="text-brand-600 dark:text-brand-400 font-semibold">Privacy</a>
-        <a href="https://discord.gg/PKMNTCGDeals" class="text-slate-500 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">Discord</a>
+  <footer class="border-t border-slate-200/70 dark:border-slate-800">
+    <div class="container-x flex flex-col items-center justify-between gap-4 py-8 text-sm md:flex-row">
+      <p class="text-slate-500 dark:text-slate-400">&copy; <span data-year>2026</span> PKMNTCGDeals &middot; made with &#128156; by mtndew</p>
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">Home</a>
+        <a href="about.html" class="text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">About</a>
+        <a href="privacy.html" class="font-semibold text-brand-600 dark:text-brand-400">Privacy</a>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/site.js"></script>
 </body>
 </html>
