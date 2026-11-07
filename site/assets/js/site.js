@@ -52,3 +52,15 @@
     window.addEventListener('load', reveal);
   }
 })();
+
+
+// St. Jude fundraising banner
+(function () {
+  var banner = document.getElementById('stjude-banner');
+  var btn = document.getElementById('stjude-dismiss');
+  if (!banner || !btn) return;
+  btn.addEventListener('click', function () {
+    banner.classList.add('hidden');
+    try { localStorage.setItem('stjudeBanner', 'dismissed'); } catch (e) {}
+  });
+})();
